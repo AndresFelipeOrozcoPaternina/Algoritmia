@@ -121,3 +121,125 @@ Un año es bisiesto si se divide exactamente entre 4, pero no entre 100. Si se d
 | 1900 | Sí | Sí | No | 1900 no es bisiesto |
 | 2000 | Sí | Sí | Sí | 2000 es bisiesto |
 | 2026 | No | No | No | 2026 no es bisiesto |
+
+## Semana 3
+
+Ejercicios con ciclos y subprocesos. Los archivos están en `semana3`. Las pruebas de abajo muestran lo que debe salir al seguir el código; falta ejecutarlas en PSeInt.
+
+### 1. Validar PIN
+
+`ValidarPIN.psc` pide el PIN y da hasta 3 intentos. El PIN correcto es 2580.
+
+| Datos que ingresas | Lo que debe salir |
+| --- | --- |
+| 2580 | Bienvenido |
+| 1111, 2580 | Bienvenido |
+| 1111, 2222, 2580 | Bienvenido |
+| 1111, 2222, 3333 | Tarjeta bloqueada |
+
+Si aciertas, deja de pedir el PIN. Si fallas tres veces, bloquea la tarjeta.
+
+### 2. Cajero del parqueadero
+
+`CajeroParqueadero.psc` suma los cobros y cuenta los carros. Al ingresar 0, cierra la caja. Ese 0 no cuenta como carro.
+
+#### Tabla paso a paso
+
+Prueba: 4000, 8000, 2000 y 0.
+
+| Paso | Cobro ingresado | Dinero reunido | Carros atendidos |
+| --- | --- | --- | --- |
+| Inicio | — | 0 | 0 |
+| 1 | 4000 | 4000 | 1 |
+| 2 | 8000 | 12000 | 2 |
+| 3 | 2000 | 14000 | 3 |
+| Cierre | 0 | 14000 | 3 |
+
+Debe salir: 3 carros atendidos y $14000 recaudados. Si ingresas 0 desde el comienzo, salen 0 carros y $0.
+
+### 3. Calificaciones
+
+`Calificaciones.psc` pide las notas de 5 estudiantes, de 0 a 5. Calcula el promedio, cuenta los que pasan con 3 o más y busca la nota más alta y la más baja. También avisa si alguien perdió.
+
+| Notas ingresadas | Promedio | Pasaron | Más alta | Más baja | Aviso de refuerzo |
+| --- | --- | --- | --- | --- | --- |
+| 3.5, 2.8, 4.9, 3.0, 4.2 | 3.68 | 4 | 4.9 | 2.8 | Sí |
+
+### 4. Pirámide
+
+`Piramide.psc` pide una altura y dibuja la pirámide con espacios y asteriscos. Usa una altura entera mayor que cero.
+
+#### Tabla paso a paso para altura 4
+
+| Fila | Espacios al comienzo | Asteriscos |
+| --- | --- | --- |
+| 1 | 3 | 1 |
+| 2 | 2 | 3 |
+| 3 | 1 | 5 |
+| 4 | 0 | 7 |
+
+Con altura 1 debe salir:
+
+```text
+*
+```
+
+Con altura 4 debe salir:
+
+```text
+   *
+  ***
+ *****
+*******
+```
+
+Con altura 6 debe salir:
+
+```text
+     *
+    ***
+   *****
+  *******
+ *********
+***********
+```
+
+### 5. Factura del restaurante
+
+`FacturaRestaurante.psc` suma los precios de los platos hasta que ingresas 0. Luego calcula el 8% de impuesto y el 10% de propina sobre el subtotal.
+
+El programa se divide en tres partes: leer el pedido, calcular un porcentaje y mostrar la factura. La misma parte que calcula el porcentaje sirve para el impuesto y la propina.
+
+Prueba: 25000, 25000, 12000 y 0.
+
+| Cuenta | Resultado |
+| --- | --- |
+| Subtotal: 25000 + 25000 + 12000 | $62000 |
+| Impuesto: 62000 × 8 / 100 | $4960 |
+| Propina: 62000 × 10 / 100 | $6200 |
+| Total: 62000 + 4960 + 6200 | $73160 |
+
+### Partes de una tienda en línea
+
+Este árbol muestra cómo se puede dividir una página. La tarjeta del producto se repite por cada producto de la tienda.
+
+```text
+Tienda en línea
+├── Encabezado
+│   ├── Logo
+│   ├── Buscador
+│   ├── Menú de categorías
+│   └── Carrito
+├── Contenido principal
+│   ├── Anuncio de ofertas
+│   └── Lista de productos
+│       └── Tarjeta de producto (se repite)
+│           ├── Imagen
+│           ├── Nombre y descripción
+│           ├── Precio
+│           └── Botón para agregar al carrito
+└── Pie de página
+    ├── Ayuda
+    ├── Redes sociales
+    └── Derechos de autor
+```
